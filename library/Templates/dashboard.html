@@ -1,0 +1,91 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Dashboard</title>
+
+<link rel="stylesheet"
+      href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📊 Library Dashboard</h1>
+
+<a href="/">
+<button>Home</button>
+</a>
+
+<br><br>
+
+<div class="card">
+
+<h2>Total Books</h2>
+
+<h3>{{ total_books }}</h3>
+
+</div>
+
+<div class="card">
+
+<h2>Available Books</h2>
+
+<h3>{{ available_books }}</h3>
+
+</div>
+
+<div class="card">
+
+<h2>Total Users</h2>
+
+<h3>{{ total_users }}</h3>
+
+</div>
+
+<hr>
+
+<h2>Database Records</h2>
+
+<table border="1" cellpadding="10">
+
+<tr>
+
+<th>Title</th>
+
+<th>Author</th>
+
+<th>Category</th>
+
+<th>Quantity</th>
+
+</tr>
+
+{% for book in books %}
+
+<tr>
+
+<td>{{ book.title }}</td>
+
+<td>{{ book.author }}</td>
+
+<td>{{ book.category }}</td>
+
+<td>{{ book.quantity }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library Management System</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📚 Library Management System</h1>
+
+<form method="GET">
+
+<input list="books"
+       name="search"
+       placeholder="Search Book">
+
+<datalist id="books">
+
+{% for book in books %}
+<option value="{{ book.title }}">
+{% endfor %}
+
+</datalist>
+
+<button type="submit">
+Search
+</button>
+
+</form>
+
+<br>
+
+{% if request.user.is_staff %}
+
+<a href="/add/">
+<button>Add Book</button>
+</a>
+
+{% endif %}
+
+<hr>
+
+<h3>Last Search : {{ last_search }}</h3>
+
+<h4>Welcome {{ request.user.username }}</h4>
+
+<a href="/logout/">
+    <button>Logout</button>
+</a>
+
+<a href="/dashboard/">
+<button>Dashboard</button>
+</a>
+
+{% for book in books %}
+
+<div class="card">
+
+<h3>{{ book.title }}</h3>
+
+
+
+
+
+{% if request.user.is_staff %}
+<p>Role: Librarian</p>
+{% else %}
+<p>Role: Student</p>
+{% endif %}
+
+
+<p>Author : {{ book.author }}</p>
+
+<p>Category : {{ book.category }}</p>
+
+<p>Available : {{ book.quantity }}</p>
+
+</div>
+
+{% empty %}
+
+<h3>No books available</h3>
+
+{% endfor %}
+
+</div>
+
+</body>
+</html>
